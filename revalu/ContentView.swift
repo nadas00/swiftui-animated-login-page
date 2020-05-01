@@ -20,7 +20,7 @@ struct ContentView: View {
         TabView(selection: $selected) {
             home()
                 .tabItem {
-                    Text("Home")
+                    Text("Profile")
                     Image(systemName: "person.fill")
             }.tag(1)
             
@@ -31,7 +31,7 @@ struct ContentView: View {
             }.tag(2)
             profile()
                 .tabItem {
-                    Text("Profile")
+                    Text("Home")
                     Image(systemName: "house.fill")
             }.tag(3)
         }.accentColor(.white)
@@ -264,10 +264,90 @@ struct home:View {
 }
 
 struct search:View {
-    var body: some View{
-        Text("search")
+    @State private var isShowingRed = false
+    @State private var name: String = ""
+    var body: some View {
+        
+        
+        VStack{
+            
+            
+            ZStack{
+                Rectangle()
+                    .fill(Color.gray)
+                    .frame(maxWidth: .infinity, maxHeight: .some(65))
+                ZStack {
+                    
+                    if !isShowingRed{
+                        Text("Search")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            
+                            
+                            .onTapGesture {
+                                withAnimation {
+                                    self.isShowingRed.toggle()
+                                }
+                        }
+                        .frame(maxWidth: .some(400), maxHeight: .some(50))
+                            
+                        .foregroundColor(Color.white)
+                        .transition(.asymmetric(insertion: .slide, removal: .opacity))
+                            
+                            
+                        .background(Color.init(red: 232/255, green: 229/255, blue: 228/255))
+                        .cornerRadius(15)
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    if isShowingRed {
+                        
+                        HStack{
+                            Image(systemName: "arrow.left")
+                                .foregroundColor(Color.white)
+                                .onTapGesture {
+                                    withAnimation{
+                                        self.isShowingRed.toggle()
+                                    }
+                                    
+                            }
+                            TextField("Movie,Tv-shows,artists..", text: $name)
+                            
+                            
+                            
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .some(65))
+                        .transition(.asymmetric(insertion:.scale(scale: 0.8), removal: .opacity))
+                        .background(Color.init(red: 232/255, green: 229/255, blue: 228/255))
+                        
+                        
+                        
+                    }
+                }
+            }
+            Text("Recent Searches")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading,15)
+                .foregroundColor(Color.white)
+            
+            
+            
+        }
+            
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(Color.black)
     }
+    
 }
+
 
 struct profile:View {
     var body: some View{

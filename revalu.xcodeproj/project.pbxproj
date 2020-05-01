@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C24BD555245CAF8000546AF1 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24BD554245CAF8000546AF1 /* SwiftUIView.swift */; };
 		C2ADD1BA245B1D4300558D71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADD1B9245B1D4300558D71 /* AppDelegate.swift */; };
 		C2ADD1BC245B1D4300558D71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADD1BB245B1D4300558D71 /* SceneDelegate.swift */; };
 		C2ADD1BE245B1D4300558D71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADD1BD245B1D4300558D71 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C24BD554245CAF8000546AF1 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		C2ADD1B6245B1D4300558D71 /* revalu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = revalu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2ADD1B9245B1D4300558D71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2ADD1BB245B1D4300558D71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				C2ADD1B9245B1D4300558D71 /* AppDelegate.swift */,
 				C2ADD1BB245B1D4300558D71 /* SceneDelegate.swift */,
 				C2ADD1BD245B1D4300558D71 /* ContentView.swift */,
+				C24BD554245CAF8000546AF1 /* SwiftUIView.swift */,
 				C2ADD1BF245B1D4500558D71 /* Assets.xcassets */,
 				C2ADD1C4245B1D4500558D71 /* LaunchScreen.storyboard */,
 				C2ADD1C7245B1D4500558D71 /* Info.plist */,
@@ -148,6 +151,7 @@
 			files = (
 				C2ADD1BA245B1D4300558D71 /* AppDelegate.swift in Sources */,
 				C2ADD1BC245B1D4300558D71 /* SceneDelegate.swift in Sources */,
+				C24BD555245CAF8000546AF1 /* SwiftUIView.swift in Sources */,
 				C2ADD1BE245B1D4300558D71 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
