@@ -295,9 +295,11 @@ struct profile:View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 //for move the text away from the beginning of the background
                                 .padding(.leading,10)
-                                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.clear, lineWidth: 1)
+                            ).background(RoundedRectangle(cornerRadius: 40).fill( Color.init(red: 68/255, green: 68/255, blue: 68/255)))
                                 .padding(.leading,15)
-                            
                         }
                         
                         //Email Stack
@@ -312,7 +314,10 @@ struct profile:View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 //for move the text away from the beginning of the background
                                 .padding(.leading,10)
-                                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color.clear, lineWidth: 1)
+                            ).background(RoundedRectangle(cornerRadius: 40).fill( Color.init(red: 68/255, green: 68/255, blue: 68/255)))
                                 .padding(.leading,15)
                         }
                         .padding(.top,10)
@@ -329,7 +334,7 @@ struct profile:View {
                             //for lining image with personal inf stack
                             .padding(.top,15)
                             .foregroundColor(Color.gray)
-                
+                        
                         //Edit Button
                         HStack{
                             Text("Edit")
@@ -348,37 +353,89 @@ struct profile:View {
                                 .stroke(Color.gray, lineWidth: 1))
                             
                             .padding(.trailing,15)
-                        
-                        
-                        
-                        
                     }
-                    
-                    
-                    
-                    
-                    
                 }
                     //for bring the stack closer to the title.
-                    .padding(.top,-10)
-                
-                
-                
-                
-                
+                    .padding(.top,-20)
             }
             Divider()
                 .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
             VStack{
-                Text("2.")
-                    .foregroundColor(Color.white)
+                
+                Text("Your stats")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 30))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,15)
+                
+                
+                VStack{
+                    HStack{
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 6, height: 6)
+                            .foregroundColor(Color.init(red: 41/255, green: 182/255, blue: 246/255))
+                        Text("Comments: ")
+                        Text("233")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,15)
+                    HStack{
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 6, height: 6)
+                            .foregroundColor(Color.init(red: 139/255, green: 195/255, blue: 74/255))
+                        Text("Likes: ")
+                        Text("67")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,15)
+                    HStack{
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 6, height: 6)
+                            .foregroundColor(Color.init(red: 211/255, green: 47/255, blue: 47/255))
+                        Text("Dislikes: ")
+                        Text("25")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,15)
+                    HStack{
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 6, height: 6)
+                            .foregroundColor(Color.init(red: 205/255, green: 220/255, blue: 57/255))
+                        Text("Favorites: ")
+                        Text("35")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,15)
+                }
             }
+            .foregroundColor(Color.white)
+            
             Divider()
                 .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
             VStack{
-                Text("3.")
-                    .foregroundColor(Color.white)
+                Text("Settings")
+                    .fontWeight(.semibold)
+                    .font(.system(size: 30))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                HStack{
+                    Text("Selected Language")
+                    
+                    
+                    HStack{
+                        Text("English")
+                        Image(systemName: "chevron.down")
+                    }           .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
+                
             }
+            .foregroundColor(Color.white)
+            .padding(.leading,15)
         }
         .padding(.top,30)
         .background(Color.black)
