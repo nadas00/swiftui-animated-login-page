@@ -8,28 +8,57 @@
 
 import SwiftUI
 
-struct storyBox {
-    var id: Int
-    let title, imageUrl : String
-}
-struct suggestionBox {
-    var id: Int
-    let title, imageUrl : String
-}
-
-struct mostViewedBox {
-    var id: Int
-    let title, imageUrl : String
-}
-
-struct trendingBox {
-    var id: Int
-    let title, imageUrl : String
-}
-
-
-
 struct ContentView: View {
+    @State private var selected = 1
+    init() {
+        UITabBar.appearance().barTintColor = UIColor.darkGray
+        UINavigationBar.appearance().tintColor=UIColor.red
+    }
+    
+    var body: some View {
+        
+        
+        TabView(selection: $selected) {
+            home()
+                .tabItem {
+                    Text("Home")
+                    Image(systemName: "person.fill")
+            }.tag(1)
+            
+            search()
+                .tabItem {
+                    Text("Search")
+                    Image(systemName: "magnifyingglass")
+            }.tag(2)
+            profile()
+                .tabItem {
+                    Text("Profile")
+                    Image(systemName: "house.fill")
+            }.tag(3)
+        }.accentColor(.white)
+    }
+}
+
+struct home:View {
+    
+    struct storyBox {
+        var id: Int
+        let title, imageUrl : String
+    }
+    struct suggestionBox {
+        var id: Int
+        let title, imageUrl : String
+    }
+    
+    struct mostViewedBox {
+        var id: Int
+        let title, imageUrl : String
+    }
+    
+    struct trendingBox {
+        var id: Int
+        let title, imageUrl : String
+    }
     
     let storyBoxes:[storyBox] = [
         storyBox(id: 0, title: "bir", imageUrl: "0"),
@@ -66,11 +95,19 @@ struct ContentView: View {
         trendingBox(id: 4, title: "bes", imageUrl: "4")
         
     ]
-    
-    
     var body: some View {
         
+        
+        
         ScrollView(.vertical){
+            Text("₺ Revalu")
+                .font(.system(size: 40))
+                .fontWeight(.semibold)
+                .foregroundColor(Color(red: 238 / 255, green: 255 / 255, blue: 65 / 255))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading,5)
+                .padding(.bottom,-15)
+            
             
             //story pages
             ScrollView(.horizontal){
@@ -140,95 +177,104 @@ struct ContentView: View {
         }
         .padding(.top,30)
         .background(Color.black)
-        
     }
     
+    //storyBox style
+    struct storyBoxView: View {
+        let box : storyBox
+        var body: some View{
+            VStack{
+                Image(box.imageUrl)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .overlay( Circle().stroke(Color.white, lineWidth: 1))
+                Text(box.title)
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .foregroundColor(Color.white)
+                
+            }
+            .frame(height:130)
+            .padding(.leading,10)
+            
+        }
+    }
+    //suggestionBox style
+    struct suggestionBoxView: View {
+        let box : suggestionBox
+        var body: some View{
+            VStack(){
+                Image(box.imageUrl)
+                    .resizable()
+                    .frame(width: 100, height: 150)
+                Text(box.title)
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+            }
+            .frame(height:200)
+            .padding(.leading,10)
+            
+            
+        }
+    }
+    
+    //mostViewedBox style
+    struct mostViewedBoxView: View {
+        let box : mostViewedBox
+        var body: some View{
+            VStack(){
+                Image(box.imageUrl)
+                    .resizable()
+                    .frame(width: 100, height: 150)
+                Text(box.title)
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+            }
+            .frame(height:200)
+            .padding(.leading,10)
+            
+        }
+    }
+    //trendingBox style
+    struct trendingBoxView: View {
+        let box : trendingBox
+        var body: some View{
+            VStack(){
+                Image(box.imageUrl)
+                    .resizable()
+                    .frame(width: 100, height: 150)
+                Text(box.title)
+                    .font(.subheadline)
+                    .fontWeight(.light)
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+            }
+            .frame(height:200)
+            .padding(.leading,10)
+            
+        }
+    }
 }
 
-//storyBox style
-struct storyBoxView: View {
-    let box : storyBox
+struct search:View {
     var body: some View{
-        VStack{
-            Image(box.imageUrl)
-                .resizable()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-                .overlay( Circle().stroke(Color.white, lineWidth: 1))
-            Text(box.title)
-                .font(.subheadline)
-                .fontWeight(.light)
-                .foregroundColor(Color.white)
-            
-        }
-        .frame(height:130)
-        .padding(.leading,10)
-        
-    }
-}
-//suggestionBox style
-struct suggestionBoxView: View {
-    let box : suggestionBox
-    var body: some View{
-        VStack(){
-            Image(box.imageUrl)
-                .resizable()
-                .frame(width: 100, height: 150)
-            Text(box.title)
-                .font(.subheadline)
-                .fontWeight(.light)
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-        }
-        .frame(height:200)
-        .padding(.leading,10)
-        
-        
+        Text("search")
     }
 }
 
-//mostViewedBox style
-struct mostViewedBoxView: View {
-    let box : mostViewedBox
+struct profile:View {
     var body: some View{
-        VStack(){
-            Image(box.imageUrl)
-                .resizable()
-                .frame(width: 100, height: 150)
-            Text(box.title)
-                .font(.subheadline)
-                .fontWeight(.light)
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-        }
-        .frame(height:200)
-        .padding(.leading,10)
-        
-        
+        Text("Profile")
     }
-}
-//trendingBox style
-struct trendingBoxView: View {
-    let box : trendingBox
-    var body: some View{
-        VStack(){
-            Image(box.imageUrl)
-                .resizable()
-                .frame(width: 100, height: 150)
-            Text(box.title)
-                .font(.subheadline)
-                .fontWeight(.light)
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-        }
-        .frame(height:200)
-        .padding(.leading,10)
-        
-        
-    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
