@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var selected = 1
     init() {
         UITabBar.appearance().barTintColor = UIColor.darkGray
-        UINavigationBar.appearance().tintColor=UIColor.red
     }
     
     var body: some View {
@@ -272,9 +271,120 @@ struct search:View {
 
 struct profile:View {
     var body: some View{
-        Text("Profile")
+        ScrollView(.vertical){
+            
+            VStack{
+                Text("Profile")
+                    .font(.system(size: 40))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                HStack{
+                    VStack{
+                        //Username Stack
+                        VStack{
+                            Text("Username")
+                                .font(.system(size: 20))
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading,15)
+                                .padding(.bottom,5)
+                            
+                            Text("hasan")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                //for move the text away from the beginning of the background
+                                .padding(.leading,10)
+                                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                                .padding(.leading,15)
+                            
+                        }
+                        
+                        //Email Stack
+                        VStack{
+                            Text("Email")
+                                .font(.system(size: 20))
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading,15)
+                                .padding(.bottom,5)
+                            Text("hasan@gmail.com")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                //for move the text away from the beginning of the background
+                                .padding(.leading,10)
+                                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                                .padding(.leading,15)
+                        }
+                        .padding(.top,10)
+                    }
+                        
+                        //silinecek
+                        .foregroundColor(Color.white)
+                    //ProfilePhoto Stack
+                    VStack{
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .padding(.trailing,15)
+                            //for lining image with personal inf stack
+                            .padding(.top,15)
+                            .foregroundColor(Color.gray)
+                
+                        //Edit Button
+                        HStack{
+                            Text("Edit")
+                                .padding(.leading,15)
+                            
+                            
+                            Image(systemName: "pencil")
+                                .padding(.trailing,15)
+                        }
+                            
+                        .padding(.top,2)
+                        .padding(.bottom,2)
+                        .foregroundColor(Color.white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.gray, lineWidth: 1))
+                            
+                            .padding(.trailing,15)
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
+                    //for bring the stack closer to the title.
+                    .padding(.top,-10)
+                
+                
+                
+                
+                
+            }
+            Divider()
+                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+            VStack{
+                Text("2.")
+                    .foregroundColor(Color.white)
+            }
+            Divider()
+                .background(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+            VStack{
+                Text("3.")
+                    .foregroundColor(Color.white)
+            }
+        }
+        .padding(.top,30)
+        .background(Color.black)
+        
+        
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
