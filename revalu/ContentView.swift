@@ -264,88 +264,84 @@ struct home:View {
 }
 
 struct search:View {
-    @State private var isShowingRed = false
+    @State private var showDetails = false
     @State private var name: String = ""
+    @State private var fop:Double = 1
+    @State private var sop:Double = 0
+    @State private var wd:CGFloat = 365
+    @State private var hg:CGFloat = 50
+    
     var body: some View {
-        
-        
         VStack{
-            
-            
             ZStack{
                 Rectangle()
-                    .fill(Color.gray)
-                    .frame(maxWidth: .infinity, maxHeight: .some(65))
-                ZStack {
+                    .foregroundColor(Color.init(red: 68/255, green: 68/255, blue: 68/255))
                     
-                    if !isShowingRed{
+                    .frame(height: 60)
+                
+                ZStack {
+                    Rectangle()
+                        .frame(width:wd,height: hg)
+                        .foregroundColor(Color.gray)
+                        .cornerRadius(10)
+                    Button(action: {
+                        withAnimation {
+                            self.showDetails.toggle()
+                            self.fop=0
+                            self.sop=1
+                            self.wd = 450
+                            self.hg=60
+                            
+                        }
+                    }) {
                         Text("Search")
                             .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            
-                            
-                            .onTapGesture {
-                                withAnimation {
-                                    self.isShowingRed.toggle()
-                                }
-                        }
-                        .frame(maxWidth: .some(400), maxHeight: .some(50))
-                            
-                        .foregroundColor(Color.white)
-                        .transition(.asymmetric(insertion: .slide, removal: .opacity))
-                            
-                            
-                        .background(Color.init(red: 232/255, green: 229/255, blue: 228/255))
-                        .cornerRadius(15)
-                        
-                        
+                            .fontWeight(.semibold)
+                            .opacity(fop)
+                            .foregroundColor(Color.white)
                         
                     }
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    if isShowingRed {
+                    if showDetails {
                         
                         HStack{
                             Image(systemName: "arrow.left")
+                                
+                                
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
-                                    withAnimation{
-                                        self.isShowingRed.toggle()
+                                    withAnimation {
+                                        self.showDetails.toggle()
+                                        self.fop=1
+                                        self.sop=0
+                                        self.wd=365
+                                        self.hg=50
                                     }
-                                    
                             }
                             TextField("Movie,Tv-shows,artists..", text: $name)
+                                .foregroundColor(Color.white)
                             
                             
-                            
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .some(65))
-                        .transition(.asymmetric(insertion:.scale(scale: 0.8), removal: .opacity))
-                        .background(Color.init(red: 232/255, green: 229/255, blue: 228/255))
-                        
-                        
-                        
+                        }  .padding(.leading,50)
+                            .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                            .foregroundColor(Color.white)
+                            .opacity(sop)
                     }
                 }
             }
-            Text("Recent Searches")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading,15)
-                .foregroundColor(Color.white)
-            
-            
-            
+      
+        ScrollView(.vertical){
+            VStack{
+                Text("TODO")
+                    .foregroundColor(Color.white)
+            }.frame(maxWidth:.infinity,maxHeight: .infinity)
+              
+        
         }
             
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(Color.black)
+        }
+          .background(Color.black)
     }
-    
 }
 
 
