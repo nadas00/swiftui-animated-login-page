@@ -20,8 +20,8 @@ struct ContentView: View {
         TabView(selection: $selected) {
             home()
                 .tabItem {
-                    Text("Profile")
-                    Image(systemName: "person.fill")
+                    Text("Home")
+                    Image(systemName: "house.fill")
             }.tag(1)
             
             search()
@@ -31,8 +31,8 @@ struct ContentView: View {
             }.tag(2)
             profile()
                 .tabItem {
-                    Text("Home")
-                    Image(systemName: "house.fill")
+                    Text("Profile")
+                    Image(systemName: "person.fill")
             }.tag(3)
         }.accentColor(.white)
     }
@@ -174,7 +174,7 @@ struct home:View {
                 }
             }
         }
-        .padding(.top,30)
+        .padding(.top,2)
         .background(Color.black)
     }
     
@@ -264,6 +264,47 @@ struct home:View {
 }
 
 struct search:View {
+    
+    struct searchBox {
+        var id: Int
+        let title, imageUrl : String
+    }
+    let searcBoxes:[searchBox] = [
+        searchBox(id: 0, title: "bir", imageUrl: "0"),
+        searchBox(id: 1, title: "iki", imageUrl: "1"),
+        searchBox(id: 2, title: "uc", imageUrl: "2"),
+        searchBox(id: 3, title: "dort", imageUrl: "3"),
+        searchBox(id: 4, title: "bes", imageUrl: "4")
+    ]
+    struct searchBoxView: View {
+        let box : searchBox
+        var body: some View{
+            HStack(){
+                Image(box.imageUrl)
+                    .resizable()
+                    .frame(width: 54, height: 70)
+                Text(box.title)
+                    .font(.callout)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Image(systemName: "xmark")
+                    
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .padding(.trailing,20)
+                    .foregroundColor( Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                    .onTapGesture {
+                        print(self.box.id)
+                }
+                
+            }
+            .frame(height:80)
+            .padding(.leading,15)
+            
+            
+        }
+    }
     @State private var showDetails = false
     @State private var name: String = ""
     @State private var fop:Double = 1
@@ -285,50 +326,50 @@ struct search:View {
                         ZStack {
                             if (!self.showDetails){
                                 Text("Search")
-                                                       .fontWeight(.semibold)
-                                                       .font(.system(size:20))
-                                                       
-                                                       .foregroundColor(Color.white)
-                                                       .opacity(fop)
-                                                       .onTapGesture {
-                                                           withAnimation {
-                                                               
-                                                               self.sop=1
-                                                               self.fop=0
-                                                               self.hg = 60
-                                                               self.radi = 0
-                                                               self.wd=380
-                                                               self.showDetails.toggle()
-                                                           }
+                                    .fontWeight(.semibold)
+                                    .font(.system(size:20))
+                                    
+                                    .foregroundColor(Color.white)
+                                    .opacity(fop)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            
+                                            self.sop=1
+                                            self.fop=0
+                                            self.hg = 60
+                                            self.radi = 0
+                                            self.wd=380
+                                            self.showDetails.toggle()
+                                        }
                                 }                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
-
+                                
                             }
                             
                             if(self.showDetails){
-                            HStack{
-                                Image(systemName: "arrow.left")
-                                    .foregroundColor(Color.white)
+                                HStack{
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(Color.white)
+                                        
+                                        
+                                        .onTapGesture {
+                                            withAnimation {
+                                                self.sop=0
+                                                self.fop=1
+                                                self.hg=45
+                                                self.wd=360
+                                                self.radi=10
+                                                self.showDetails.toggle()
+                                            }
+                                    }
+                                    TextField("Movie,Tv-shows,artists..", text: $name)
+                                        .foregroundColor(Color.white)
                                     
-                                    
-                                    .onTapGesture {
-                                        withAnimation {
-                                            self.sop=0
-                                            self.fop=1
-                                            self.hg=45
-                                            self.wd=360
-                                            self.radi=10
-                                            self.showDetails.toggle()
-                                        }
                                 }
-                                TextField("Movie,Tv-shows,artists..", text: $name)
-                                    .foregroundColor(Color.white)
+                                .padding(.leading,15)
+                                .opacity(sop)
+                                .transition(.asymmetric(insertion: .slide, removal: .opacity))
                                 
                             }
-                            .padding(.leading,15)
-                            .opacity(sop)
-                                .transition(.asymmetric(insertion: .slide, removal: .opacity))
-                            
-                              }
                             
                             
                         }
@@ -360,8 +401,20 @@ struct search:View {
                         
                         
                     }
-                    Text("TODO")
+                    Text("Recently Searched")
                         .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth:.infinity, alignment: .leading)
+                        .padding(.leading,15)
+                        .padding(.top,15)
+                    VStack{
+                        
+                        ForEach(searcBoxes, id: \.id) {
+                            box in
+                            searchBoxView(box: box)
+                        }
+                    }
+                    .foregroundColor(Color.white)
                 }.frame(maxWidth:.infinity,maxHeight: .infinity)
                 
                 
@@ -530,11 +583,11 @@ struct profile:View {
                 HStack{
                     Text("Selected Language")
                     
-                    
                     HStack{
                         Text("English")
                         Image(systemName: "chevron.down")
-                    }           .frame(maxWidth: .infinity, alignment: .leading)
+                    }           .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing,20)
                     
                 }
                 
