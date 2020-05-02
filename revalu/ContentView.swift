@@ -268,79 +268,108 @@ struct search:View {
     @State private var name: String = ""
     @State private var fop:Double = 1
     @State private var sop:Double = 0
-    @State private var wd:CGFloat = 365
-    @State private var hg:CGFloat = 50
-    
+    @State private var wd:CGFloat = 360
+    @State private var hg:CGFloat = 45
+    @State private var radi:CGFloat = 10
     var body: some View {
         VStack{
-            ZStack{
-                Rectangle()
-                    .foregroundColor(Color.init(red: 68/255, green: 68/255, blue: 68/255))
-                    
-                    .frame(height: 60)
-                
-                ZStack {
-                    Rectangle()
-                        .frame(width:wd,height: hg)
-                        .foregroundColor(Color.gray)
-                        .cornerRadius(10)
-                    Button(action: {
-                        withAnimation {
-                            self.showDetails.toggle()
-                            self.fop=0
-                            self.sop=1
-                            self.wd = 450
-                            self.hg=60
+            
+            ScrollView(.vertical){
+                VStack{
+                    ZStack{
+                        Rectangle()
+                            .foregroundColor(Color.init(red: 68/255, green: 68/255, blue: 68/255))
+                            
+                            .frame(height: 60)
+                        
+                        ZStack {
+                            if (!self.showDetails){
+                                Text("Search")
+                                                       .fontWeight(.semibold)
+                                                       .font(.system(size:20))
+                                                       
+                                                       .foregroundColor(Color.white)
+                                                       .opacity(fop)
+                                                       .onTapGesture {
+                                                           withAnimation {
+                                                               
+                                                               self.sop=1
+                                                               self.fop=0
+                                                               self.hg = 60
+                                                               self.radi = 0
+                                                               self.wd=380
+                                                               self.showDetails.toggle()
+                                                           }
+                                }                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
+
+                            }
+                            
+                            if(self.showDetails){
+                            HStack{
+                                Image(systemName: "arrow.left")
+                                    .foregroundColor(Color.white)
+                                    
+                                    
+                                    .onTapGesture {
+                                        withAnimation {
+                                            self.sop=0
+                                            self.fop=1
+                                            self.hg=45
+                                            self.wd=360
+                                            self.radi=10
+                                            self.showDetails.toggle()
+                                        }
+                                }
+                                TextField("Movie,Tv-shows,artists..", text: $name)
+                                    .foregroundColor(Color.white)
+                                
+                            }
+                            .padding(.leading,15)
+                            .opacity(sop)
+                                .transition(.asymmetric(insertion: .slide, removal: .opacity))
+                            
+                              }
+                            
                             
                         }
-                    }) {
-                        Text("Search")
-                            .font(.system(size: 20))
-                            .fontWeight(.semibold)
-                            .opacity(fop)
-                            .foregroundColor(Color.white)
-                        
-                    }
-                    
-                    if showDetails {
-                        
-                        HStack{
-                            Image(systemName: "arrow.left")
+                        .background(
+                            Rectangle()
+                                .foregroundColor(Color.init(red: 138/255, green: 138/255, blue: 138/255))
                                 
                                 
-                                .foregroundColor(Color.white)
-                                .onTapGesture {
-                                    withAnimation {
-                                        self.showDetails.toggle()
-                                        self.fop=1
-                                        self.sop=0
-                                        self.wd=365
-                                        self.hg=50
-                                    }
+                                .frame(width:wd, height: hg )
+                                .cornerRadius(radi)
+                            
+                        )    .onTapGesture {
+                            withAnimation {
+                                
+                                
+                                if(!self.showDetails){
+                                    self.sop=1
+                                    self.fop=0
+                                    
+                                    self.hg = 60
+                                    self.radi = 0
+                                    self.wd=380
+                                    self.showDetails.toggle()
+                                }
+                                
+                                
                             }
-                            TextField("Movie,Tv-shows,artists..", text: $name)
-                                .foregroundColor(Color.white)
-                            
-                            
-                        }  .padding(.leading,50)
-                            .transition(.asymmetric(insertion: .scale, removal: .opacity))
-                            .foregroundColor(Color.white)
-                            .opacity(sop)
+                        }
+                        
+                        
                     }
-                }
+                    Text("TODO")
+                        .foregroundColor(Color.white)
+                }.frame(maxWidth:.infinity,maxHeight: .infinity)
+                
+                
             }
-      
-        ScrollView(.vertical){
-            VStack{
-                Text("TODO")
-                    .foregroundColor(Color.white)
-            }.frame(maxWidth:.infinity,maxHeight: .infinity)
-              
-        
-        }
+            .padding(.top,0.3)
             
         }
-          .background(Color.black)
+        .background(Color.black)
     }
 }
 
