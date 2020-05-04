@@ -338,7 +338,7 @@ struct search:View {
                                             self.fop=0
                                             self.hg = 60
                                             self.radi = 0
-                                            self.wd=380
+                                            self.wd = CGFloat.screenWidth
                                             self.showDetails.toggle()
                                         }
                                 }                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
@@ -606,5 +606,12 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
         
+    }
+}
+
+
+extension CGFloat{
+     static var screenWidth: CGFloat {
+    return UIScreen.main.bounds.width
     }
 }

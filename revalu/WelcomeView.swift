@@ -4,6 +4,7 @@ struct WelcomeView: View {
     
     @State private var scale: CGFloat = 1
     @State private var email = ""
+    @State private var isEmailValid : Bool   = true
     @State private var password = ""
     @State private var userName = ""
     @State private var confirmPassword = ""
@@ -30,12 +31,29 @@ struct WelcomeView: View {
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
                         .font(.system(size: 15))
-                    TextField("", text: self.$email)
+                    TextField("email...", text: $email, onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if self.textFieldValidatorEmail(self.email) {
+                                self.isEmailValid = true
+                            } else {
+                                self.isEmailValid = false
+                                self.email = ""
+                            }
+                        }
+                    })
                         .foregroundColor(Color.white)
                         .padding()
                         .background(Color.inputColor.opacity(0.8))
                         .cornerRadius(10)
                         .shadow(radius: 10.0, x: 20, y: 10)
+                    
+                    if !self.isEmailValid {
+                        Text("Email is Not Valid")
+                            .font(.callout)
+                            .foregroundColor(Color.red)
+                            .fontWeight(.semibold)
+                    }
+                    
                     Text("Password")
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
@@ -96,12 +114,28 @@ struct WelcomeView: View {
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
                         .font(.system(size: 15))
-                    TextField("", text: self.$email)
+                    TextField("email...", text: $email, onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if self.textFieldValidatorEmail(self.email) {
+                                self.isEmailValid = true
+                            } else {
+                                self.isEmailValid = false
+                                self.email = ""
+                            }
+                        }
+                    })
                         .foregroundColor(Color.white)
                         .padding()
                         .background(Color.inputColor.opacity(0.8))
                         .cornerRadius(10)
                         .shadow(radius: 10.0, x: 20, y: 10)
+                    
+                    if !self.isEmailValid {
+                        Text("Email is Not Valid")
+                            .font(.callout)
+                            .foregroundColor(Color.red)
+                            .fontWeight(.semibold)
+                    }
                     Text("Password")
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
@@ -183,7 +217,7 @@ struct WelcomeView: View {
                         
                     }) {
                         
-                        Text("Sign Up")
+                        Text("Back to Login")
                     }
                 }  .foregroundColor(.white)
                     .padding(.bottom,20)
@@ -195,6 +229,17 @@ struct WelcomeView: View {
                 .edgesIgnoringSafeArea(.all))
         
     }
+    
+    func textFieldValidatorEmail(_ string: String) -> Bool {
+        if string.count > 100 {
+            return false
+        }
+        
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: string)
+    }
+    
 }
 
 extension Color {
